@@ -1,6 +1,6 @@
-# Getting Started with Create React App
+# memory-game
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A Memory Game in React that allows users to match pairs of cards. The game has a timer and settings form and support various optional features such as animations and restricted bad guesses.
 
 ## Available Scripts
 
