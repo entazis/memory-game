@@ -1,14 +1,18 @@
 import { Col, Container, Row } from "react-bootstrap";
 import Card from "./card/Card";
+import { useAppSelector } from "../store/hooks";
+import { selectDeck } from "./gameSlice";
 
-//TODO render 8 cards on large screen
 function Cards() {
+  const deck = useAppSelector(selectDeck);
+
+  //TODO render 8 cards on large screen
   return (
     <Container>
       <Row>
-        {Array.from({ length: 3 }).map((_, idx) => (
-          <Col xs={4} sm={3} md={2} key={idx}>
-            <Card />
+        {deck.cards.map((card) => (
+          <Col xs={4} sm={3} md={2} key={card.id}>
+            <Card id={card.id} />
           </Col>
         ))}
       </Row>

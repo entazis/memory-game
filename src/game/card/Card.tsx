@@ -1,19 +1,26 @@
-import { useCallback, useState } from "react";
 import BootstrapCard from "react-bootstrap/Card";
 import fox from "../../assets/fox.png";
 import dog from "../../assets/dog.png";
 import "./Card.css";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { flipCard, selectCardById } from "../gameSlice";
+import { useCallback } from "react";
 
-function Card() {
-  const [isFlipped, setFlipped] = useState(false);
+interface CardProps {
+  id: string;
+}
 
-  const flipCard = useCallback(() => {
-    setFlipped((prev) => !prev);
-  }, []);
+function Card({ id }: CardProps) {
+  const card = useAppSelector((state) => selectCardById(state, id));
+  const dispatch = useAppDispatch();
 
-  return (
+  const handleFlip = useCallback(() => {
+    dispatch(flipCard(id));
+  }, [dispatch, id]);
+
+  return card ? (
     <BootstrapCard
-      className={`flip-card ${isFlipped ? "flipped" : ""}`}
+      className={`flip-card ${card.isFlipped ? "flipped" : ""}`}
       style={{
         //TODO move styles to a CSS module file, use className
         width: "100px",
@@ -22,7 +29,7 @@ function Card() {
         alignItems: "center",
         justifyContent: "center",
       }}
-      onClick={flipCard}
+      onClick={handleFlip}
     >
       <div className="flip-card-inner">
         <div className="flip-card-front">
@@ -45,7 +52,7 @@ function Card() {
         </div>
       </div>
     </BootstrapCard>
-  );
+  ) : null;
 }
 
 export default Card;
