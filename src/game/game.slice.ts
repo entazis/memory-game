@@ -1,47 +1,13 @@
 import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../store/store";
 import cardRepository from "./card/cardRepository";
-
-//TODO separate interfaces to separate file
-interface Card {
-  id: string;
-  imageRef: string;
-  isFlipped: boolean;
-  isMatched: boolean;
-}
-
-interface Deck {
-  cards: Card[];
-  flippedCard: boolean;
-}
-
-interface Settings {
-  cardPairsCount: number;
-  timer: number;
-  cardRepository: Card[];
-  badGuessesLimit: number;
-  flipBackTimeout: number;
-  userName: string;
-}
-
-interface Progress {
-  isStarted: boolean;
-  isEnded: boolean;
-  won: boolean;
-  score: number;
-  elapsedTime: number;
-}
-
-export interface GameState {
-  deck: Deck;
-  settings: Settings;
-  progress: Progress;
-}
+import { GameState } from "./game.interface";
+import { durstenfeldShuffle } from "./game.util";
 
 const initialState: GameState = {
   deck: {
     cards: [],
-    flippedCard: false,
+    cardToMatch: null,
   },
   settings: {
     cardPairsCount: 12,
@@ -60,13 +26,6 @@ const initialState: GameState = {
   },
 };
 
-const durstenfeldShuffle = (array: any[]) => {
-  for (let i = array.length - 1; i >= 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-};
-
 export const gameSlice = createSlice({
   name: "game",
   initialState,
@@ -83,6 +42,9 @@ export const gameSlice = createSlice({
       const card = state.deck.cards[action.payload];
       if (card) {
         card.isFlipped = !card.isFlipped;
+
+        //TODO review matching logic
+        state.deck.cardToMatch = card.isFlipped ? card : null;
       }
     },
     checkPairs: (state) => {

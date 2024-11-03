@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import "./App.css";
 import Cards from "./game/Cards";
 import Header from "./header/Header";
-import { createDeck } from "./game/gameSlice";
+import { createDeck } from "./game/game.slice";
 import { useAppDispatch } from "./store/hooks";
 
 function App() {

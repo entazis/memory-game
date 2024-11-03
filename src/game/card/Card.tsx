@@ -3,7 +3,7 @@ import fox from "../../assets/fox.png";
 import dog from "../../assets/dog.png";
 import "./Card.css";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { flipCard, selectCardById } from "../gameSlice";
+import { flipCard, selectCardById } from "../game.slice";
 import { useCallback } from "react";
 
 interface CardProps {

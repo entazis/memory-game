@@ -1,7 +1,7 @@
 import { Col, Container, Row } from "react-bootstrap";
 import Card from "./card/Card";
 import { useAppSelector } from "../store/hooks";
-import { selectDeck } from "./gameSlice";
+import { selectDeck } from "./game.slice";
 
 function Cards() {
   const deck = useAppSelector(selectDeck);
