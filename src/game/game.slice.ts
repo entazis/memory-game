@@ -11,10 +11,10 @@ const initialState: GameState = {
   },
   settings: {
     cardPairsCount: 12,
-    timer: 60,
+    timer: 60000,
     cardRepository: [],
     badGuessesLimit: 0,
-    flipBackTimeout: 5,
+    flipBackTimeout: 5000,
     userName: "",
   },
   progress: {
@@ -41,10 +41,23 @@ export const gameSlice = createSlice({
     flipCard: (state, action: PayloadAction<number>) => {
       const card = state.deck.cards[action.payload];
       if (card) {
+        state.progress.isStarted = true;
         card.isFlipped = !card.isFlipped;
 
-        //TODO review matching logic
-        state.deck.cardToMatch = card.isFlipped ? card : null;
+        if (state.deck.cardToMatch) {
+          const flippedCards = state.deck.cards.filter(
+            (card) => card.isFlipped && !card.isMatched,
+          );
+          if (
+            flippedCards.length === 2 &&
+            flippedCards[0].id === flippedCards[1].id
+          ) {
+            flippedCards.forEach((card) => (card.isMatched = true));
+          }
+          state.deck.cardToMatch = null;
+        } else {
+          state.deck.cardToMatch = card;
+        }
       }
     },
     checkPairs: (state) => {

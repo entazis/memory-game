@@ -3,8 +3,8 @@ import fox from "../../assets/fox.png";
 import dog from "../../assets/dog.png";
 import "./Card.css";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { flipCard, selectCardByIndex } from "../game.slice";
-import { useCallback } from "react";
+import { flipCard, selectCardByIndex, selectSettings } from "../game.slice";
+import { useCallback, useEffect } from "react";
 
 interface CardProps {
   index: number;
@@ -12,12 +12,22 @@ interface CardProps {
 
 function Card({ index }: CardProps) {
   const card = useAppSelector((state) => selectCardByIndex(state, index));
+  const settings = useAppSelector(selectSettings);
   const dispatch = useAppDispatch();
 
-  //FIXME both cards are flipped
   const handleFlip = useCallback(() => {
     dispatch(flipCard(index));
   }, [dispatch, index]);
+
+  useEffect(() => {
+    if (card?.isFlipped && !card.isMatched) {
+      const timeout = setTimeout(() => {
+        dispatch(flipCard(index));
+      }, settings.flipBackTimeout);
+
+      return () => clearTimeout(timeout);
+    }
+  }, [card, settings, dispatch, index]);
 
   return card ? (
     <BootstrapCard
