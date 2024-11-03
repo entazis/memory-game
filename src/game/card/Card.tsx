@@ -8,15 +8,17 @@ import { useCallback } from "react";
 
 interface CardProps {
   id: string;
+  index: number;
 }
 
-function Card({ id }: CardProps) {
+function Card({ id, index }: CardProps) {
   const card = useAppSelector((state) => selectCardById(state, id));
   const dispatch = useAppDispatch();
 
+  //FIXME both cards are flipped
   const handleFlip = useCallback(() => {
-    dispatch(flipCard(id));
-  }, [dispatch, id]);
+    dispatch(flipCard(index));
+  }, [dispatch, index]);
 
   return card ? (
     <BootstrapCard

@@ -59,6 +59,13 @@ const initialState: GameState = {
   },
 };
 
+const durstenfeldShuffle = (array: any[]) => {
+  for (let i = array.length - 1; i >= 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+};
+
 export const gameSlice = createSlice({
   name: "game",
   initialState,
@@ -85,11 +92,9 @@ export const gameSlice = createSlice({
         },
       ];
     },
-    shuffleDeck: (state) => {
-      //TODO implement
-    },
-    flipCard: (state, action: PayloadAction<string>) => {
-      const card = state.deck.cards.find((card) => card.id === action.payload);
+    shuffleDeck: (state) => durstenfeldShuffle(state.deck.cards),
+    flipCard: (state, action: PayloadAction<number>) => {
+      const card = state.deck.cards[action.payload];
       if (card) {
         card.isFlipped = !card.isFlipped;
       }
