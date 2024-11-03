@@ -1,5 +1,6 @@
 import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../store/store";
+import cardRepository from "./card/cardRepository";
 
 //TODO separate interfaces to separate file
 interface Card {
@@ -71,26 +72,11 @@ export const gameSlice = createSlice({
   initialState,
   reducers: {
     createDeck: (state) => {
-      state.deck.cards = [
-        {
-          id: "1",
-          imageRef: "fox",
-          isFlipped: false,
-          isMatched: false,
-        },
-        {
-          id: "2",
-          imageRef: "dog",
-          isFlipped: false,
-          isMatched: false,
-        },
-        {
-          id: "3",
-          imageRef: "cat",
-          isFlipped: false,
-          isMatched: false,
-        },
-      ];
+      const cards = cardRepository
+        .concat(cardRepository)
+        .map((card) => ({ ...card }));
+      durstenfeldShuffle(cards);
+      state.deck.cards = cards;
     },
     shuffleDeck: (state) => durstenfeldShuffle(state.deck.cards),
     flipCard: (state, action: PayloadAction<number>) => {
