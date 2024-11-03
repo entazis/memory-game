@@ -3,16 +3,15 @@ import fox from "../../assets/fox.png";
 import dog from "../../assets/dog.png";
 import "./Card.css";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { flipCard, selectCardById } from "../game.slice";
+import { flipCard, selectCardByIndex } from "../game.slice";
 import { useCallback } from "react";
 
 interface CardProps {
-  id: string;
   index: number;
 }
 
-function Card({ id, index }: CardProps) {
-  const card = useAppSelector((state) => selectCardById(state, id));
+function Card({ index }: CardProps) {
+  const card = useAppSelector((state) => selectCardByIndex(state, index));
   const dispatch = useAppDispatch();
 
   //FIXME both cards are flipped

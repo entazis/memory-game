@@ -10,9 +10,9 @@ function Cards() {
   return (
     <Container>
       <Row>
-        {deck.cards.map((card, index) => (
+        {deck.cards.map((_, index) => (
           <Col xs={4} sm={3} md={2} key={index}>
-            <Card id={card.id} index={index} />
+            <Card index={index} />
           </Col>
         ))}
       </Row>

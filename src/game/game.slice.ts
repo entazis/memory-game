@@ -57,11 +57,11 @@ export const { createDeck, shuffleDeck, flipCard, checkPairs } =
   gameSlice.actions;
 
 const selectCardsState = (state: RootState) => state.game.deck.cards;
-const selectCardId = (state: RootState, cardId: string) => cardId;
+const selectCardIndex = (state: RootState, cardIndex: number) => cardIndex;
 const selectCards = createSelector([selectCardsState], (value) => value || []);
-export const selectCardById = createSelector(
-  [selectCards, selectCardId],
-  (cards, cardId) => cards.find((card) => card.id === cardId),
+export const selectCardByIndex = createSelector(
+  [selectCards, selectCardIndex],
+  (cards, cardIndex) => cards[cardIndex],
 );
 
 export const selectDeck = (state: RootState) => state.game.deck;
