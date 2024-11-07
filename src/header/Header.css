@@ -1,0 +1,48 @@
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background-color: white;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.logo .dot {
+    color: #f44336;
+}
+
+.score {
+    display: flex;
+    align-items: center;
+}
+
+.score-number {
+    font-size: 40px;
+    color: #f44336;
+    margin-right: 10px;
+}
+
+.matches {
+    font-size: 14px;
+    color: black;
+}
+
+.matches span {
+    display: block;
+}
+
+.icons {
+    display: flex;
+    gap: 15px;
+}
+
+.icon {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+}
