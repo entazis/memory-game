@@ -11,11 +11,12 @@ interface Settings {
 
 interface Progress {
   cards: Card[];
-  isStarted: boolean;
-  isEnded: boolean;
+  startedAt: Date | null;
+  endedAt: Date | null;
   cardsFlipped: Card[];
   won: boolean;
   score: number;
+  mistakes: number;
   elapsedTime: number;
 }
 

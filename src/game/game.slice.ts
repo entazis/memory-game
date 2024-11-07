@@ -16,10 +16,11 @@ const initialState: GameState = {
   progress: {
     cards: [],
     cardsFlipped: [],
-    isStarted: false,
-    isEnded: false,
+    startedAt: null,
+    endedAt: null,
     won: false,
     score: 0,
+    mistakes: 0,
     elapsedTime: 0,
   },
 };
@@ -39,7 +40,7 @@ export const gameSlice = createSlice({
       const { progress } = state;
       const card = progress.cards[action.payload];
       card.isFlipped = true;
-      progress.isStarted = true;
+      progress.startedAt = progress.startedAt || new Date();
       progress.cardsFlipped.push(card);
     },
     matchCards: (state) => {
@@ -53,7 +54,10 @@ export const gameSlice = createSlice({
           flippedCards[1].isMatched = true;
           state.progress.score++;
 
-          //TODO clear cardsFlipped
+          //TODO could not flip new cards until the cardsFlipped is not cleared
+        } else {
+          console.log("Not matched!");
+          state.progress.mistakes++;
         }
       }
     },
@@ -61,20 +65,24 @@ export const gameSlice = createSlice({
       state.progress.cards
         .filter((card) => card.isFlipped && !card.isMatched)
         .forEach((card) => {
-          console.log(
-            "Flip back unmatched card",
-            card.id,
-            card.isFlipped,
-            card.isMatched,
-          );
           card.isFlipped = false;
         });
       state.progress.cardsFlipped = [];
     },
+    tick: (state) => {
+      const { progress } = state;
+      if (progress.startedAt) {
+        progress.elapsedTime =
+          new Date().getTime() - progress.startedAt.getTime();
+        if (progress.elapsedTime >= state.settings.timer) {
+          progress.endedAt = new Date();
+        }
+      }
+    },
   },
 });
 
-export const { createDeck, flipCard, matchCards, flipBackUnmatched } =
+export const { createDeck, flipCard, matchCards, flipBackUnmatched, tick } =
   gameSlice.actions;
 
 const selectCardsState = (state: RootState) => state.game.progress.cards;

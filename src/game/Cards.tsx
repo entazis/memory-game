@@ -6,11 +6,13 @@ import {
   matchCards,
   selectProgress,
   selectSettings,
+  tick,
 } from "./game.slice";
 import { useEffect } from "react";
 
 function Cards() {
-  const { cards, cardsFlipped } = useAppSelector(selectProgress);
+  const { startedAt, endedAt, cards, cardsFlipped } =
+    useAppSelector(selectProgress);
   const { flipBackTimeout } = useAppSelector(selectSettings);
   const dispatch = useAppDispatch();
 
@@ -26,6 +28,19 @@ function Cards() {
       return () => clearTimeout(timer);
     }
   }, [cardsFlipped, flipBackTimeout, dispatch]);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      if (startedAt && endedAt) {
+        clearInterval(timer);
+        return;
+      } else if (startedAt) {
+        dispatch(tick());
+      }
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, [startedAt, endedAt, dispatch]);
 
   //TODO render 8 cards on large screen
   return (
