@@ -48,9 +48,10 @@ export const gameSlice = createSlice({
       );
       if (flippedCards.length === 2) {
         if (flippedCards[0].id === flippedCards[1].id) {
-          console.log("Matched!", flippedCards[0].id);
+          console.log("Matched!");
           flippedCards[0].isMatched = true;
           flippedCards[1].isMatched = true;
+          state.progress.score++;
 
           //TODO clear cardsFlipped
         }
