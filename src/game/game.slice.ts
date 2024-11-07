@@ -3,6 +3,7 @@ import { RootState } from "../store/store";
 import cardRepository from "./card/cardRepository";
 import { GameState, Settings } from "./game.interface";
 import { durstenfeldShuffle } from "./game.util";
+import { Card } from "./card/Card.interface";
 
 const initialState: GameState = {
   settings: {
@@ -28,16 +29,20 @@ const initialState: GameState = {
 //TODO check if bad guesses limit is reached
 //TODO update won state
 
+const shuffleCards = (): Card[] => {
+  const cards = cardRepository
+    .concat(cardRepository)
+    .map((card) => ({ ...card }));
+  durstenfeldShuffle(cards);
+  return cards;
+};
+
 export const gameSlice = createSlice({
   name: "game",
   initialState,
   reducers: {
-    createDeck: (state) => {
-      const cards = cardRepository
-        .concat(cardRepository)
-        .map((card) => ({ ...card }));
-      durstenfeldShuffle(cards);
-      state.progress.cards = cards;
+    initCards: (state) => {
+      state.progress.cards = shuffleCards();
     },
     flipCard: (state, action: PayloadAction<number>) => {
       const { progress } = state;
@@ -92,7 +97,7 @@ export const gameSlice = createSlice({
 });
 
 export const {
-  createDeck,
+  initCards,
   flipCard,
   matchCards,
   flipBackUnmatched,
