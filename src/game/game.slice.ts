@@ -91,7 +91,10 @@ export const gameSlice = createSlice({
       state.settings = { ...state.settings, ...action.payload };
     },
     resetProgress: (state) => {
-      state.progress = initialState.progress;
+      state.progress = {
+        ...initialState.progress,
+        cards: shuffleCards(),
+      };
     },
   },
 });
