@@ -23,7 +23,7 @@ function Cards() {
 
       const timer = setTimeout(() => {
         dispatch(flipBackUnmatched());
-      }, flipBackTimeout);
+      }, flipBackTimeout * 1000);
 
       return () => clearTimeout(timer);
     }

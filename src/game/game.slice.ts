@@ -1,17 +1,17 @@
 import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../store/store";
 import cardRepository from "./card/cardRepository";
-import { GameState } from "./game.interface";
+import { GameState, Settings } from "./game.interface";
 import { durstenfeldShuffle } from "./game.util";
 
 const initialState: GameState = {
   settings: {
     cardPairsCount: 12,
-    timer: 60000,
+    timer: 60,
     cardRepository: [],
-    badGuessesLimit: 0,
-    flipBackTimeout: 2000,
-    userName: "",
+    badGuessesLimit: 10,
+    flipBackTimeout: 2,
+    userName: "anonymous",
   },
   progress: {
     cards: [],
@@ -24,6 +24,9 @@ const initialState: GameState = {
     elapsedTime: 0,
   },
 };
+
+//TODO check if bad guesses limit is reached
+//TODO update won state
 
 export const gameSlice = createSlice({
   name: "game",
@@ -73,17 +76,26 @@ export const gameSlice = createSlice({
       const { progress } = state;
       if (progress.startedAt) {
         progress.elapsedTime =
-          new Date().getTime() - progress.startedAt.getTime();
+          (new Date().getTime() - progress.startedAt.getTime()) / 1000;
         if (progress.elapsedTime >= state.settings.timer) {
           progress.endedAt = new Date();
         }
       }
     },
+    updateSettings: (state, action: PayloadAction<Settings>) => {
+      state.settings = { ...state.settings, ...action.payload };
+    },
   },
 });
 
-export const { createDeck, flipCard, matchCards, flipBackUnmatched, tick } =
-  gameSlice.actions;
+export const {
+  createDeck,
+  flipCard,
+  matchCards,
+  flipBackUnmatched,
+  tick,
+  updateSettings,
+} = gameSlice.actions;
 
 const selectCardsState = (state: RootState) => state.game.progress.cards;
 const selectCardIndex = (state: RootState, cardIndex: number) => cardIndex;

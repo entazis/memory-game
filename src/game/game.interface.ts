@@ -1,6 +1,6 @@
 import { Card } from "./card/Card.interface";
 
-interface Settings {
+export interface Settings {
   cardPairsCount: number;
   timer: number;
   cardRepository: Card[];
