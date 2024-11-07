@@ -1,33 +1,26 @@
 import BootstrapCard from "react-bootstrap/Card";
-import fox from "../../assets/fox.png";
 import dog from "../../assets/dog.png";
 import "./Card.css";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { flipCard, selectCardByIndex, selectSettings } from "../game.slice";
-import { useCallback, useEffect } from "react";
+import { flipCard, selectCardByIndex, selectProgress } from "../game.slice";
+import { useCallback } from "react";
 
 interface CardProps {
   index: number;
 }
 
+//TODO use font awesome icons for the cards
+
 function Card({ index }: CardProps) {
   const card = useAppSelector((state) => selectCardByIndex(state, index));
-  const settings = useAppSelector(selectSettings);
+  const { cardsFlipped } = useAppSelector(selectProgress);
   const dispatch = useAppDispatch();
 
   const handleFlip = useCallback(() => {
-    dispatch(flipCard(index));
-  }, [dispatch, index]);
-
-  useEffect(() => {
-    if (card?.isFlipped && !card.isMatched) {
-      const timeout = setTimeout(() => {
-        dispatch(flipCard(index));
-      }, settings.flipBackTimeout);
-
-      return () => clearTimeout(timeout);
+    if (!card.isFlipped && cardsFlipped.length < 2) {
+      dispatch(flipCard(index));
     }
-  }, [card, settings, dispatch, index]);
+  }, [card, cardsFlipped, dispatch, index]);
 
   return card ? (
     <BootstrapCard
@@ -45,15 +38,17 @@ function Card({ index }: CardProps) {
       <div className="flip-card-inner">
         <div className="flip-card-front">
           <div className="card-content">
+            <BootstrapCard.Title>{card.id}</BootstrapCard.Title>
             <BootstrapCard.Img
               variant="top"
-              src={fox}
+              // src={fox}
               className="bootstrap-card"
             />
           </div>
         </div>
         <div className="flip-card-back">
           <div className="card-content">
+            <BootstrapCard.Title>{card.id}</BootstrapCard.Title>
             <BootstrapCard.Img
               variant="top"
               src={dog}

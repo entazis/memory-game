@@ -1,10 +1,5 @@
 import { Card } from "./card/Card.interface";
 
-interface Deck {
-  cards: Card[];
-  cardToMatch: Card | null;
-}
-
 interface Settings {
   cardPairsCount: number;
   timer: number;
@@ -15,15 +10,16 @@ interface Settings {
 }
 
 interface Progress {
+  cards: Card[];
   isStarted: boolean;
   isEnded: boolean;
+  cardsFlipped: Card[];
   won: boolean;
   score: number;
   elapsedTime: number;
 }
 
 export interface GameState {
-  deck: Deck;
-  settings: Settings;
   progress: Progress;
+  settings: Settings;
 }

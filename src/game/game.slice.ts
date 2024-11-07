@@ -5,19 +5,17 @@ import { GameState } from "./game.interface";
 import { durstenfeldShuffle } from "./game.util";
 
 const initialState: GameState = {
-  deck: {
-    cards: [],
-    cardToMatch: null,
-  },
   settings: {
     cardPairsCount: 12,
     timer: 60000,
     cardRepository: [],
     badGuessesLimit: 0,
-    flipBackTimeout: 5000,
+    flipBackTimeout: 2000,
     userName: "",
   },
   progress: {
+    cards: [],
+    cardsFlipped: [],
     isStarted: false,
     isEnded: false,
     won: false,
@@ -35,41 +33,50 @@ export const gameSlice = createSlice({
         .concat(cardRepository)
         .map((card) => ({ ...card }));
       durstenfeldShuffle(cards);
-      state.deck.cards = cards;
+      state.progress.cards = cards;
     },
-    shuffleDeck: (state) => durstenfeldShuffle(state.deck.cards),
     flipCard: (state, action: PayloadAction<number>) => {
-      const card = state.deck.cards[action.payload];
-      if (card) {
-        state.progress.isStarted = true;
-        card.isFlipped = !card.isFlipped;
+      const { progress } = state;
+      const card = progress.cards[action.payload];
+      card.isFlipped = true;
+      progress.isStarted = true;
+      progress.cardsFlipped.push(card);
+    },
+    matchCards: (state) => {
+      const flippedCards = state.progress.cards.filter(
+        (card) => card.isFlipped && !card.isMatched,
+      );
+      if (flippedCards.length === 2) {
+        if (flippedCards[0].id === flippedCards[1].id) {
+          console.log("Matched!", flippedCards[0].id);
+          flippedCards[0].isMatched = true;
+          flippedCards[1].isMatched = true;
 
-        if (state.deck.cardToMatch) {
-          const flippedCards = state.deck.cards.filter(
-            (card) => card.isFlipped && !card.isMatched,
-          );
-          if (
-            flippedCards.length === 2 &&
-            flippedCards[0].id === flippedCards[1].id
-          ) {
-            flippedCards.forEach((card) => (card.isMatched = true));
-          }
-          state.deck.cardToMatch = null;
-        } else {
-          state.deck.cardToMatch = card;
+          //TODO clear cardsFlipped
         }
       }
     },
-    checkPairs: (state) => {
-      //TODO implement
+    flipBackUnmatched: (state) => {
+      state.progress.cards
+        .filter((card) => card.isFlipped && !card.isMatched)
+        .forEach((card) => {
+          console.log(
+            "Flip back unmatched card",
+            card.id,
+            card.isFlipped,
+            card.isMatched,
+          );
+          card.isFlipped = false;
+        });
+      state.progress.cardsFlipped = [];
     },
   },
 });
 
-export const { createDeck, shuffleDeck, flipCard, checkPairs } =
+export const { createDeck, flipCard, matchCards, flipBackUnmatched } =
   gameSlice.actions;
 
-const selectCardsState = (state: RootState) => state.game.deck.cards;
+const selectCardsState = (state: RootState) => state.game.progress.cards;
 const selectCardIndex = (state: RootState, cardIndex: number) => cardIndex;
 const selectCards = createSelector([selectCardsState], (value) => value || []);
 export const selectCardByIndex = createSelector(
@@ -77,7 +84,6 @@ export const selectCardByIndex = createSelector(
   (cards, cardIndex) => cards[cardIndex],
 );
 
-export const selectDeck = (state: RootState) => state.game.deck;
 export const selectSettings = (state: RootState) => state.game.settings;
 export const selectProgress = (state: RootState) => state.game.progress;
 
