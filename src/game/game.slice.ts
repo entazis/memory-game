@@ -85,6 +85,9 @@ export const gameSlice = createSlice({
     updateSettings: (state, action: PayloadAction<Settings>) => {
       state.settings = { ...state.settings, ...action.payload };
     },
+    resetProgress: (state) => {
+      state.progress = initialState.progress;
+    },
   },
 });
 
@@ -95,6 +98,7 @@ export const {
   flipBackUnmatched,
   tick,
   updateSettings,
+  resetProgress,
 } = gameSlice.actions;
 
 const selectCardsState = (state: RootState) => state.game.progress.cards;

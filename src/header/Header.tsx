@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useCallback, useState } from "react";
 import "./Header.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCog, faSyncAlt } from "@fortawesome/free-solid-svg-icons";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import {
+  resetProgress,
   selectProgress,
   selectSettings,
   updateSettings,
@@ -57,11 +58,17 @@ function Icons() {
   const [isModalOpen, setModalOpen] = useState(false);
   const [settings, setSettings] = useState<Settings>(settingsState);
 
-  //TODO reset the game
-  const handleSave = () => {
+  const handleSave = useCallback(() => {
     console.log("Settings saved!", settings);
     dispatch(updateSettings(settings));
-  };
+  }, [settings, dispatch]);
+
+  const handleReset = useCallback(() => {
+    console.log("Game reset!");
+    dispatch(resetProgress());
+  }, [dispatch]);
+
+  //TODO use clickable mouse icon on hover
 
   return (
     <div className="icons">
@@ -70,7 +77,11 @@ function Icons() {
         className="icon settings"
         onClick={() => setModalOpen(true)}
       />
-      <FontAwesomeIcon icon={faSyncAlt} className="icon refresh" />
+      <FontAwesomeIcon
+        icon={faSyncAlt}
+        className="icon refresh"
+        onClick={handleReset}
+      />
       <SettingsModal
         settings={settings}
         setSettings={setSettings}
