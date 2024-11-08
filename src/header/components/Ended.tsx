@@ -5,7 +5,7 @@ export default function ScoreDisplay({
   endedAt,
   won,
 }: {
-  endedAt: Date | null;
+  endedAt: number | null;
   won: boolean;
 }) {
   return endedAt ? (

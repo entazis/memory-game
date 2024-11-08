@@ -50,7 +50,7 @@ export const gameSlice = createSlice({
       const card = cards[action.payload];
       if (cardsFlipped.length < 2 && !endedAt) {
         card.isFlipped = true;
-        progress.startedAt = progress.startedAt || new Date();
+        progress.startedAt = progress.startedAt || new Date().getTime();
         progress.cardsFlipped.push(card);
       }
     },
@@ -68,14 +68,14 @@ export const gameSlice = createSlice({
 
           if (state.progress.score === state.settings.cardPairsCount) {
             state.progress.won = true;
-            state.progress.endedAt = new Date();
+            state.progress.endedAt = new Date().getTime();
           }
         } else {
           console.log("Not matched!");
           state.progress.mistakes++;
 
           if (state.progress.mistakes >= state.settings.badGuessesLimit) {
-            state.progress.endedAt = new Date();
+            state.progress.endedAt = new Date().getTime();
           }
         }
       }
@@ -92,9 +92,9 @@ export const gameSlice = createSlice({
       const { progress } = state;
       if (progress.startedAt) {
         progress.elapsedTime =
-          (new Date().getTime() - progress.startedAt.getTime()) / 1000;
+          (new Date().getTime() - progress.startedAt) / 1000;
         if (progress.elapsedTime >= state.settings.timer) {
-          progress.endedAt = new Date();
+          progress.endedAt = new Date().getTime();
         }
       }
     },

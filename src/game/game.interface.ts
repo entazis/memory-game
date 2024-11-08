@@ -11,8 +11,8 @@ export interface Settings {
 
 interface Progress {
   cards: Card[];
-  startedAt: Date | null;
-  endedAt: Date | null;
+  startedAt: number | null;
+  endedAt: number | null;
   cardsFlipped: Card[];
   won: boolean;
   score: number;
