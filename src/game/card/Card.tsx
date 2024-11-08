@@ -1,5 +1,4 @@
 import BootstrapCard from "react-bootstrap/Card";
-import dog from "../../assets/dog.png";
 import styles from "./Card.module.css";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { flipCard, selectCardByIndex } from "../game.slice";
@@ -8,8 +7,6 @@ import { useCallback } from "react";
 interface CardProps {
   index: number;
 }
-
-//TODO use font awesome icons for the cards
 
 function Card({ index }: CardProps) {
   const card = useAppSelector((state) => selectCardByIndex(state, index));
@@ -29,20 +26,14 @@ function Card({ index }: CardProps) {
       <div className={styles.flipCardInner}>
         <div className={styles.flipCardFront}>
           <div className={styles.cardContent}>
-            <BootstrapCard.Title>{card.id}</BootstrapCard.Title>
-            <BootstrapCard.Img
-              variant="top"
-              // src={fox}
-              className={styles.bootstrapCard}
-            />
+            <BootstrapCard.Img variant="top" className={styles.bootstrapCard} />
           </div>
         </div>
         <div className={styles.flipCardBack}>
           <div className={styles.cardContent}>
-            <BootstrapCard.Title>{card.id}</BootstrapCard.Title>
             <BootstrapCard.Img
               variant="top"
-              src={dog}
+              src={card.imageRef}
               className={styles.bootstrapCard}
             />
           </div>

@@ -16,7 +16,6 @@ function Cards() {
   const { flipBackTimeout } = useAppSelector(selectSettings);
   const dispatch = useAppDispatch();
 
-  //TODO refactor
   useEffect(() => {
     if (cardsFlipped.length >= 2) {
       dispatch(matchCards());
