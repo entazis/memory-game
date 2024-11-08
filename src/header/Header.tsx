@@ -1,14 +1,15 @@
 import React from "react";
 import styles from "./Header.module.css";
 import { Logo, Menu, ScoreDisplay } from "./components";
+import { Container } from "react-bootstrap";
 
 function Header() {
   return (
-    <div className={styles.header}>
+    <Container className={styles.header}>
       <Logo />
       <ScoreDisplay />
       <Menu />
-    </div>
+    </Container>
   );
 }
 

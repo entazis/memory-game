@@ -8,6 +8,9 @@ interface CardProps {
   index: number;
 }
 
+//TODO add frame to images
+//TODO center images in the card
+
 function Card({ index }: CardProps) {
   const card = useAppSelector((state) => selectCardByIndex(state, index));
   const dispatch = useAppDispatch();
@@ -19,27 +22,23 @@ function Card({ index }: CardProps) {
   }, [card, dispatch, index]);
 
   return card ? (
-    <BootstrapCard
-      className={`${styles.flipCard} ${card.isFlipped ? styles.flipped : ""} ${styles.bootstrapCardStyle}`}
+    <div
+      className={`${styles.flipCard} ${card.isFlipped ? styles.flipped : ""} ${styles.bootstrapCardStyle} `}
       onClick={handleFlip}
     >
       <div className={styles.flipCardInner}>
         <div className={styles.flipCardFront}>
           <div className={styles.cardContent}>
-            <BootstrapCard.Img variant="top" className={styles.bootstrapCard} />
+            <BootstrapCard.Img src={card.imageRef} />
           </div>
         </div>
         <div className={styles.flipCardBack}>
           <div className={styles.cardContent}>
-            <BootstrapCard.Img
-              variant="top"
-              src={card.imageRef}
-              className={styles.bootstrapCard}
-            />
+            {/*<BootstrapCard.Title>{card.id}</BootstrapCard.Title>*/}
           </div>
         </div>
       </div>
-    </BootstrapCard>
+    </div>
   ) : null;
 }
 

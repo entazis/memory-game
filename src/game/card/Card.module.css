@@ -26,10 +26,17 @@
 }
 
 .flipCardFront {
+  transform: rotateY(180deg);
 }
 
 .flipCardBack {
-  transform: rotateY(180deg);
+  background-image: url('./../../assets/card.svg');
+  background-size: cover;
+}
+
+.flipCardBack:hover {
+  background-image: url('./../../assets/card-hover.svg');
+  background-size: cover;
 }
 
 .cardContent {

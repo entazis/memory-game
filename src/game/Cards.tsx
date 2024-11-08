@@ -44,9 +44,15 @@ function Cards() {
   //TODO render 8 cards on large screen
   return (
     <Container>
-      <Row>
+      <Row className="row-gap-3">
         {cards.map((_, index) => (
-          <Col xs={4} sm={3} md={2} key={index}>
+          <Col
+            xs={4}
+            sm={3}
+            md={2}
+            key={index}
+            className="d-flex justify-content-center"
+          >
             <Card index={index} />
           </Col>
         ))}
