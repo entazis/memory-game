@@ -1,6 +1,6 @@
 import BootstrapCard from "react-bootstrap/Card";
 import dog from "../../assets/dog.png";
-import "./Card.css";
+import styles from "./Card.module.css";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import { flipCard, selectCardByIndex } from "../game.slice";
 import { useCallback } from "react";
@@ -23,35 +23,27 @@ function Card({ index }: CardProps) {
 
   return card ? (
     <BootstrapCard
-      className={`flip-card ${card.isFlipped ? "flipped" : ""}`}
-      style={{
-        //TODO move styles to a CSS module file, use className
-        width: "100px",
-        height: "150px",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
+      className={`${styles.flipCard} ${card.isFlipped ? styles.flipped : ""} ${styles.bootstrapCardStyle}`}
       onClick={handleFlip}
     >
-      <div className="flip-card-inner">
-        <div className="flip-card-front">
-          <div className="card-content">
+      <div className={styles.flipCardInner}>
+        <div className={styles.flipCardFront}>
+          <div className={styles.cardContent}>
             <BootstrapCard.Title>{card.id}</BootstrapCard.Title>
             <BootstrapCard.Img
               variant="top"
               // src={fox}
-              className="bootstrap-card"
+              className={styles.bootstrapCard}
             />
           </div>
         </div>
-        <div className="flip-card-back">
-          <div className="card-content">
+        <div className={styles.flipCardBack}>
+          <div className={styles.cardContent}>
             <BootstrapCard.Title>{card.id}</BootstrapCard.Title>
             <BootstrapCard.Img
               variant="top"
               src={dog}
-              className="bootstrap-card"
+              className={styles.bootstrapCard}
             />
           </div>
         </div>
