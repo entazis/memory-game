@@ -26,11 +26,14 @@ const initialState: GameState = {
   },
 };
 
-const shuffleCards = (): Card[] => {
-  const cards = cardRepository
-    .concat(cardRepository)
-    .map((card) => ({ ...card }));
+const shuffleCards = (count: number): Card[] => {
+  if (count < 1 || count > cardRepository.length) {
+    throw new Error("Invalid card count");
+  }
+  const slice = cardRepository.slice(0, count);
+  const cards = slice.concat(slice).map((card) => ({ ...card }));
   durstenfeldShuffle(cards);
+
   return cards;
 };
 
@@ -39,7 +42,7 @@ export const gameSlice = createSlice({
   initialState,
   reducers: {
     initCards: (state) => {
-      state.progress.cards = shuffleCards();
+      state.progress.cards = shuffleCards(state.settings.cardPairsCount);
     },
     flipCard: (state, action: PayloadAction<number>) => {
       const { progress } = state;
@@ -100,7 +103,7 @@ export const gameSlice = createSlice({
     resetProgress: (state) => {
       state.progress = {
         ...initialState.progress,
-        cards: shuffleCards(),
+        cards: shuffleCards(state.settings.cardPairsCount),
       };
     },
   },
