@@ -61,6 +61,7 @@ export const gameSlice = createSlice({
           flippedCards[0].isMatched = true;
           flippedCards[1].isMatched = true;
           state.progress.score++;
+          state.progress.cardsFlipped = [];
 
           //TODO could not flip new cards until the cardsFlipped is not cleared
         } else {
