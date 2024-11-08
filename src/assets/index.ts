@@ -12,6 +12,8 @@ import img11 from "./11.png";
 import img12 from "./12.png";
 import logo from "./logo.svg";
 
+//TODO serve images from CDN
+
 export {
   img1,
   img2,
