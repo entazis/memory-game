@@ -1,5 +1,5 @@
 import Logo from "./Logo";
 import ScoreDisplay from "./ScoreDisplay";
-import Icons from "./Icons";
+import Menu from "./Menu";
 
-export { Logo, ScoreDisplay, Icons };
+export { Logo, ScoreDisplay, Menu };

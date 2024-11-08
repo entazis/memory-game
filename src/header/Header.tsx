@@ -1,13 +1,13 @@
 import React from "react";
 import styles from "./Header.module.css";
-import { Icons, Logo, ScoreDisplay } from "./components";
+import { Logo, Menu, ScoreDisplay } from "./components";
 
 function Header() {
   return (
     <div className={styles.header}>
       <Logo />
       <ScoreDisplay />
-      <Icons />
+      <Menu />
     </div>
   );
 }

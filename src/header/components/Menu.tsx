@@ -11,7 +11,7 @@ import {
 import { Settings } from "../../game/game.interface";
 import SettingsModal from "./settings/SettingsModal";
 
-export default function Icons() {
+export default function Menu() {
   const settingsState = useAppSelector(selectSettings);
   const dispatch = useAppDispatch();
 
