@@ -26,9 +26,6 @@ const initialState: GameState = {
   },
 };
 
-//TODO check if bad guesses limit is reached
-//TODO update won state
-
 const shuffleCards = (): Card[] => {
   const cards = cardRepository
     .concat(cardRepository)
@@ -63,10 +60,17 @@ export const gameSlice = createSlice({
           state.progress.score++;
           state.progress.cardsFlipped = [];
 
-          //TODO could not flip new cards until the cardsFlipped is not cleared
+          if (state.progress.score === state.settings.cardPairsCount) {
+            state.progress.won = true;
+            state.progress.endedAt = new Date();
+          }
         } else {
           console.log("Not matched!");
           state.progress.mistakes++;
+
+          if (state.progress.mistakes >= state.settings.badGuessesLimit) {
+            state.progress.endedAt = new Date();
+          }
         }
       }
     },
