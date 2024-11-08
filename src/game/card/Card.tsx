@@ -2,7 +2,7 @@ import BootstrapCard from "react-bootstrap/Card";
 import dog from "../../assets/dog.png";
 import "./Card.css";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
-import { flipCard, selectCardByIndex, selectProgress } from "../game.slice";
+import { flipCard, selectCardByIndex } from "../game.slice";
 import { useCallback } from "react";
 
 interface CardProps {
@@ -13,14 +13,13 @@ interface CardProps {
 
 function Card({ index }: CardProps) {
   const card = useAppSelector((state) => selectCardByIndex(state, index));
-  const { cardsFlipped } = useAppSelector(selectProgress);
   const dispatch = useAppDispatch();
 
   const handleFlip = useCallback(() => {
-    if (!card.isFlipped && cardsFlipped.length < 2) {
+    if (!card.isFlipped) {
       dispatch(flipCard(index));
     }
-  }, [card, cardsFlipped, dispatch, index]);
+  }, [card, dispatch, index]);
 
   return card ? (
     <BootstrapCard

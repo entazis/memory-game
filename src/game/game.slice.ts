@@ -44,9 +44,11 @@ export const gameSlice = createSlice({
     flipCard: (state, action: PayloadAction<number>) => {
       const { progress } = state;
       const card = progress.cards[action.payload];
-      card.isFlipped = true;
-      progress.startedAt = progress.startedAt || new Date();
-      progress.cardsFlipped.push(card);
+      if (progress.cardsFlipped.length < 2) {
+        card.isFlipped = true;
+        progress.startedAt = progress.startedAt || new Date();
+        progress.cardsFlipped.push(card);
+      }
     },
     matchCards: (state) => {
       const flippedCards = state.progress.cards.filter(
