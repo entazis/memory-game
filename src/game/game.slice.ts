@@ -46,8 +46,9 @@ export const gameSlice = createSlice({
     },
     flipCard: (state, action: PayloadAction<number>) => {
       const { progress } = state;
-      const card = progress.cards[action.payload];
-      if (progress.cardsFlipped.length < 2) {
+      const { cards, cardsFlipped, endedAt } = progress;
+      const card = cards[action.payload];
+      if (cardsFlipped.length < 2 && !endedAt) {
         card.isFlipped = true;
         progress.startedAt = progress.startedAt || new Date();
         progress.cardsFlipped.push(card);
