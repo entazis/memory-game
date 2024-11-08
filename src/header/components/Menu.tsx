@@ -21,6 +21,7 @@ export default function Icons() {
   const handleSave = useCallback(() => {
     console.log("Settings saved!", settings);
     dispatch(updateSettings(settings));
+    dispatch(resetProgress());
   }, [settings, dispatch]);
 
   const handleReset = useCallback(() => {
