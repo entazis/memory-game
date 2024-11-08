@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from "react";
-import "../Header.css";
+import styles from "../Header.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCog, faSyncAlt } from "@fortawesome/free-solid-svg-icons";
 import { useAppDispatch, useAppSelector } from "../../store/hooks";
@@ -31,7 +31,7 @@ export default function Icons() {
   //TODO use clickable mouse icon on hover
 
   return (
-    <div className="icons">
+    <div className={styles.icons}>
       <FontAwesomeIcon
         icon={faCog}
         className="icon settings"

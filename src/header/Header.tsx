@@ -1,12 +1,10 @@
 import React from "react";
-import "./Header.css";
+import styles from "./Header.module.css";
 import { Icons, Logo, ScoreDisplay } from "./components";
-
-//TODO use css modules
 
 function Header() {
   return (
-    <div className="header">
+    <div className={styles.header}>
       <Logo />
       <ScoreDisplay />
       <Icons />

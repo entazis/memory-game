@@ -1,10 +1,10 @@
 import React from "react";
-import "../Header.css";
+import styles from "../Header.module.css";
 import { useAppSelector } from "../../store/hooks";
 import { selectProgress, selectSettings } from "../../game/game.slice";
 import Ended from "./Ended";
 
-//TODO make the "ended" nicer
+//TODO make the "ended" look nicer
 
 export default function ScoreDisplay() {
   const { score, elapsedTime, mistakes, endedAt, won } =
@@ -13,10 +13,10 @@ export default function ScoreDisplay() {
 
   const remainingTime = Math.round(timer - elapsedTime);
   return (
-    <div className="score">
+    <div className={styles.score}>
       <Ended endedAt={endedAt} won={won} />
-      <div className="score-number">{remainingTime}</div>
-      <div className="matches">
+      <div className={styles.scoreNumber}>{remainingTime}</div>
+      <div className={styles.matches}>
         <span>{score} matches</span>
         <span>{mistakes} mistakes</span>
       </div>

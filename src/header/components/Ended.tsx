@@ -1,5 +1,5 @@
 import React from "react";
-import "../Header.css";
+import styles from "../Header.module.css";
 
 export default function ScoreDisplay({
   endedAt,
@@ -10,9 +10,9 @@ export default function ScoreDisplay({
 }) {
   return endedAt ? (
     won ? (
-      <div className="won">won</div>
+      <div className={styles.won}>won</div>
     ) : (
-      <div className="lost">lost</div>
+      <div className={styles.lost}>lost</div>
     )
   ) : null;
 }

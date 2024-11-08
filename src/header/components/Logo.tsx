@@ -1,12 +1,11 @@
 import React from "react";
-import "../Header.css";
+import styles from "../Header.module.css";
 
 export default function Logo() {
-  //TODO insert logo
   return (
-    <div className="logo">
+    <div className={styles.logo}>
       <span>mem</span>
-      <span className="dot">•</span>
+      <span className={styles.dot}>•</span>
       <span>mission</span>
     </div>
   );
