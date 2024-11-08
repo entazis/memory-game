@@ -2,7 +2,7 @@ import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import "./SettingsModal.css";
-import { Settings } from "../../game/game.interface";
+import { Settings } from "../../../game/game.interface";
 
 interface GameSettingsModalProps {
   settings: Settings;
