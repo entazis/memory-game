@@ -11,6 +11,9 @@ import img10 from "./10.png";
 import img11 from "./11.png";
 import img12 from "./12.png";
 import logo from "./logo.svg";
+import card from "./card.svg";
+import cardFlipped from "./card-flipped.svg";
+import cardHover from "./card-hover.svg";
 
 //TODO serve images from CDN
 
@@ -28,4 +31,7 @@ export {
   img11,
   img12,
   logo,
+  card,
+  cardFlipped,
+  cardHover,
 };
