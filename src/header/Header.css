@@ -46,3 +46,10 @@
     height: 20px;
     display: inline-block;
 }
+
+.won {
+    color: green;
+}
+.lost {
+    color: red;
+}
