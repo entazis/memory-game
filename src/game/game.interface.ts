@@ -13,6 +13,7 @@ interface Progress {
   cards: Card[];
   startedAt: number | null;
   endedAt: number | null;
+  //TODO refactor to use card indexes
   cardsFlipped: Card[];
   won: boolean;
   score: number;
