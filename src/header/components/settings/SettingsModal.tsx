@@ -22,7 +22,7 @@ const GameSettingsModal = ({
   onSave,
 }: GameSettingsModalProps) => {
   return isOpen ? (
-    <div className="modal-overlay">
+    <div className="modal-overlay" aria-label="settings-modal">
       <div className="modal-content">
         <div className="modal-header">
           <h2>Game settings</h2>

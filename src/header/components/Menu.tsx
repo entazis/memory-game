@@ -38,12 +38,14 @@ export default function Menu() {
         className="icon settings"
         onClick={() => setModalOpen(true)}
         aria-label="settings"
+        data-testid="settings-icon"
       />
       <FontAwesomeIcon
         icon={faSyncAlt}
         className="icon refresh"
         onClick={handleReset}
         aria-label="refresh"
+        data-testid="refresh-icon"
       />
       <SettingsModal
         settings={settings}
