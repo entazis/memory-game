@@ -26,7 +26,7 @@ const GameSettingsModal = ({
       <div className="modal-content">
         <div className="modal-header">
           <h2>Game settings</h2>
-          <button onClick={onClose} className="close-button">
+          <button onClick={onClose} className="close-button" aria-label="close">
             <FontAwesomeIcon icon={faTimes} />
           </button>
         </div>
