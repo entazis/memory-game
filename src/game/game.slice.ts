@@ -5,7 +5,7 @@ import { GameState, Settings } from "./game.interface";
 import { durstenfeldShuffle } from "./game.util";
 import { Card } from "./card/Card.interface";
 
-const initialState: GameState = {
+export const initialState: GameState = {
   settings: {
     cardPairsCount: 12,
     timer: 60,
@@ -15,7 +15,7 @@ const initialState: GameState = {
     userName: "anonymous",
   },
   progress: {
-    cards: [],
+    cards: [...cardRepository],
     cardsFlipped: [],
     startedAt: null,
     endedAt: null,

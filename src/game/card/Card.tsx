@@ -25,6 +25,7 @@ function Card({ index }: CardProps) {
     <div
       className={`${styles.flipCard} ${card.isFlipped ? styles.flipped : ""} ${styles.bootstrapCardStyle} `}
       onClick={handleFlip}
+      data-testid="card-testid"
     >
       <div className={styles.flipCardInner}>
         <div className={styles.flipCardFront}>
