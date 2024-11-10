@@ -34,9 +34,7 @@ function Card({ index }: CardProps) {
           </div>
         </div>
         <div className={styles.flipCardBack}>
-          <div className={styles.cardContent}>
-            {/*<BootstrapCard.Title>{card.id}</BootstrapCard.Title>*/}
-          </div>
+          <div className={styles.cardContent}></div>
         </div>
       </div>
     </div>

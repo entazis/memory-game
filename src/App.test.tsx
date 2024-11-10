@@ -24,6 +24,8 @@ const renderApp = (): RenderResult =>
     </Provider>,
   );
 
+//TODO add more test cases: matching cards, unmatching cards, game reset, hitting bad guesses limit, hitting time limit, etc.
+
 describe("App", () => {
   it("renders the app", () => {
     renderApp();

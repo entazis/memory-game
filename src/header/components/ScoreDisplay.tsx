@@ -4,7 +4,7 @@ import { useAppSelector } from "../../store/hooks";
 import { selectProgress, selectSettings } from "../../game/game.slice";
 import { Ended } from "./index";
 
-//TODO make the "ended" look nicer
+//TODO add style to the component, make it better looking
 
 export default function ScoreDisplay() {
   const { score, elapsedTime, mistakes, endedAt, won } =

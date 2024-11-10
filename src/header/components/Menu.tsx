@@ -11,6 +11,9 @@ import {
 import { Settings } from "../../game/game.interface";
 import SettingsModal from "./settings/SettingsModal";
 
+//TODO add login/ logout function
+//TODO add "save game" function
+
 export default function Menu() {
   const settingsState = useAppSelector(selectSettings);
   const dispatch = useAppDispatch();

@@ -6,8 +6,6 @@ import { initialState } from "./game.slice";
 
 const mockStore = configureStore([]);
 
-//TODO refactor store initialization
-
 describe("Cards component", () => {
   it("renders all cards correctly", () => {
     const store = mockStore({ game: initialState });

@@ -2,8 +2,7 @@ import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../store/store";
 import cardRepository from "./card/cardRepository";
 import { GameState, Settings } from "./game.interface";
-import { durstenfeldShuffle } from "./game.util";
-import { Card } from "./card/Card.interface";
+import { shuffleCards } from "./game.util";
 
 export const initialState: GameState = {
   settings: {
@@ -24,17 +23,6 @@ export const initialState: GameState = {
     mistakes: 0,
     elapsedTime: 0,
   },
-};
-
-const shuffleCards = (count: number): Card[] => {
-  if (count < 1 || count > cardRepository.length) {
-    throw new Error("Invalid card count");
-  }
-  const slice = cardRepository.slice(0, count);
-  const cards = slice.concat(slice).map((card) => ({ ...card }));
-  durstenfeldShuffle(cards);
-
-  return cards;
 };
 
 export const gameSlice = createSlice({

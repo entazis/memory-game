@@ -13,6 +13,7 @@ interface GameSettingsModalProps {
 }
 
 //TODO use css modules
+//TODO set and save user profiles
 
 const GameSettingsModal = ({
   settings,

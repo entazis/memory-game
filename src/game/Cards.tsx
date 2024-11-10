@@ -10,6 +10,12 @@ import {
 } from "./game.slice";
 import { useEffect } from "react";
 
+//TODO add multiplayer feature
+//TODO sync multiplayer game between different clients
+//TODO add "match!" visual animation and sound effect
+//TODO add victory animation and sound effect
+//TODO create leaderboard
+
 function Cards() {
   const { startedAt, endedAt, cards, cardsFlipped } =
     useAppSelector(selectProgress);

@@ -13,6 +13,8 @@ import {
   img9,
 } from "../../assets";
 
+//TODO get these from the BE, store card metadata in database
+
 const cards = [
   {
     id: "1",
