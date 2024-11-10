@@ -27,6 +27,12 @@
 
 .flipCardFront {
   transform: rotateY(180deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f8f8f8;
+  margin: auto;
+  border-radius: 10px;
 }
 
 .flipCardBack {
@@ -59,3 +65,5 @@
   align-items: center;
   justify-content: center;
 }
+
+
