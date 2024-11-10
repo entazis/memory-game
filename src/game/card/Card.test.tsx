@@ -1,10 +1,30 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import {
+  fireEvent,
+  render,
+  RenderResult,
+  screen,
+} from "@testing-library/react";
 import { Provider } from "react-redux";
-import configureStore from "redux-mock-store";
+import { configureStore } from "@reduxjs/toolkit";
+import configureMockStore from "redux-mock-store";
 import Card from "./Card";
-import { flipCard, initialState } from "../game.slice";
+import { flipCard, gameSlice, initialState } from "../game.slice";
+import React from "react";
 
-const mockStore = configureStore([]);
+const mockStore = configureMockStore([]);
+const store = configureStore({
+  reducer: {
+    game: gameSlice.reducer,
+  },
+  preloadedState: { game: initialState },
+});
+
+const renderCard = (index: number): RenderResult =>
+  render(
+    <Provider store={store}>
+      <Card index={index} />
+    </Provider>,
+  );
 
 describe("Card component", () => {
   it("renders the card image correctly", () => {
@@ -30,6 +50,23 @@ describe("Card component", () => {
     const cardElement = screen.getByTestId("card-testid");
     fireEvent.click(cardElement);
     expect(store.dispatch).toHaveBeenCalledWith(flipCard(0));
+  });
+
+  it("flips the card and adds the 'flipped' class when clicked", () => {
+    const { rerender } = renderCard(0);
+
+    const cardElement = screen.getByTestId("card-testid");
+    expect(cardElement).not.toHaveClass("flipped");
+
+    fireEvent.click(cardElement);
+
+    rerender(
+      <Provider store={store}>
+        <Card index={0} />
+      </Provider>,
+    );
+
+    expect(cardElement).toHaveClass("flipped");
   });
 
   it("does not flip the card when clicked if it is already flipped", () => {
