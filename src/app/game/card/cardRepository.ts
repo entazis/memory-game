@@ -11,7 +11,7 @@ import {
   img7,
   img8,
   img9,
-} from "../../assets";
+} from "../../../assets";
 
 //TODO get these from the BE, store card metadata in database
 

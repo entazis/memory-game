@@ -2,7 +2,7 @@ import React, { useCallback, useState } from "react";
 import styles from "../Header.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCog, faSyncAlt } from "@fortawesome/free-solid-svg-icons";
-import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import {
   resetProgress,
   selectSettings,

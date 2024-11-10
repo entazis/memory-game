@@ -74,20 +74,21 @@ memory-game/\
 │   ├── index.html\
 │   └── ...\
 ├── src/\
+│   ├── app/\
+│   │   ├── game/\
+│   │   │   ├── card\
+│   │   │   │   └── Card.tsx\
+│   │   │   └── Cards.tsx\
+│   │   ├── header\
+│   │   │   ├── components\
+│   │   │   │   ├── settings\
+│   │   │   │   │   └── SettingsModal.tsx\
+│   │   │   │   ├── Ended.tsx\
+│   │   │   │   ├── Logo.tsx\
+│   │   │   │   ├── Menu.tsx\
+│   │   │   │   └── ScoreDisplay.tsx\
+│   │   │   └── Header.tsx\
 │   ├── assets/\
-│   ├── game/\
-│   │   ├── card\
-│   │   │   └── Card.tsx\
-│   │   └── Cards.tsx\
-│   ├── header\
-│   │   ├── components\
-│   │   │   ├── settings\
-│   │   │   │   └── SettingsModal.tsx\
-│   │   │   ├── Ended.tsx\
-│   │   │   ├── Logo.tsx\
-│   │   │   ├── Menu.tsx\
-│   │   │   └── ScoreDisplay.tsx\
-│   │   └── Header.tsx\
 │   ├── store\
 │   │   ├── hooks.tsx\
 │   │   └── store.tsx\

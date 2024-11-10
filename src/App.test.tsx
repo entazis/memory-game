@@ -6,7 +6,7 @@ import {
   screen,
 } from "@testing-library/react";
 import App from "./App";
-import { gameSlice, initialState } from "./game/game.slice";
+import { gameSlice, initialState } from "./app/game/game.slice";
 import { Provider } from "react-redux";
 import userEvent from "@testing-library/user-event";
 import { configureStore } from "@reduxjs/toolkit";

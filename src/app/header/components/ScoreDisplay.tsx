@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "../Header.module.css";
-import { useAppSelector } from "../../store/hooks";
+import { useAppSelector } from "../../../store/hooks";
 import { selectProgress, selectSettings } from "../../game/game.slice";
 import { Ended } from "./index";
 

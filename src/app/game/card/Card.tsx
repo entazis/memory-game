@@ -1,8 +1,10 @@
 import BootstrapCard from "react-bootstrap/Card";
 import styles from "./Card.module.css";
-import { useAppDispatch, useAppSelector } from "../../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../../store/hooks";
 import { flipCard, selectCardByIndex } from "../game.slice";
 import { useCallback } from "react";
+
+//TODO use alias for long include paths (store)
 
 interface CardProps {
   index: number;

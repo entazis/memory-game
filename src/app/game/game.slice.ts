@@ -1,5 +1,5 @@
 import { createSelector, createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { RootState } from "../store/store";
+import { RootState } from "../../store/store";
 import cardRepository from "./card/cardRepository";
 import { GameState, Settings } from "./game.interface";
 import { shuffleCards } from "./game.util";

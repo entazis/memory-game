@@ -1,6 +1,6 @@
 import { Col, Container, Row } from "react-bootstrap";
 import Card from "./card/Card";
-import { useAppDispatch, useAppSelector } from "../store/hooks";
+import { useAppDispatch, useAppSelector } from "../../store/hooks";
 import {
   flipBackUnmatched,
   matchCards,
